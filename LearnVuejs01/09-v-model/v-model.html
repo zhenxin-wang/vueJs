@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <label for="male">
+        <input type="radio" id="male" name="sex" value="男" v-model="sex">男
+    </label>
+    <label for="famale">
+        <input type="radio" id="famale" name="sex" value="女" v-model="sex">女
+    </label>
+    <h2>{{sex}}</h2>
+    <div>
+        <label for="agree">
+            <input type="checkbox" id="agree" v-model="isAgree">
+        </label>
+        <h2>{{isAgree}}</h2>
+    </div>
+
+    <div>
+        <input type="checkbox" value="aaa" v-model="hobbies">aaa
+        <input type="checkbox" value="bbb" v-model="hobbies">bbb
+        <input type="checkbox" value="ccc" v-model="hobbies">ccc
+        <input type="checkbox" value="ddd" v-model="hobbies">ddd
+        <h2>{{hobbies}}</h2>
+    </div>
+
+    <div>
+        <select v-model="fruit" name="abc">
+            <option value="111">111</option>
+            <option value="222">222</option>
+            <option value="333">333</option>
+            <option value="444">444</option>
+            <option value="555">555</option>
+        </select>
+        <h2>{{fruit}}</h2>
+    </div>
+
+    <div>
+        <select v-model="fruits" name="abc" multiple>
+            <option value="111">111</option>
+            <option value="222">222</option>
+            <option value="333">333</option>
+            <option value="444">444</option>
+            <option value="555">555</option>
+        </select>
+        <h2>{{fruits}}</h2>
+    </div>
+    <div>
+        <input type="text" v-model.lazy="message">
+        <h2>{{message}}</h2>
+    </div>
+    <div>
+        <input type="number" v-model.number="age">
+        <h2>{{typeof age}}</h2>
+    </div>
+    <div>
+    <!--        去除空格-->
+        <input type="number" v-model.trim="name">
+        <h2>{{name}}</h2>
+    </div>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data:{
+            message:'nihao',
+            age:'',
+            name:'',
+            sex: '男',
+            isAgree: false,
+            hobbies: [],
+            fruit: '111',
+            fruits: []
+        }
+    })
+</script>
+</body>
+</html>

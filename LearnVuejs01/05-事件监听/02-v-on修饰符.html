@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--  stop  -->
+    <div @click="btn1Click">
+        <button @click.stop="btn2Click">按钮1</button>
+    </div>
+    <!--  prevent-手动提交表单  -->
+    <form>
+        <input type="submit" value="提交" @click.prevent="submitClick">
+    </form>
+    <!-- 监听键盘按键   -->
+    <input type="text" @keyup.enter="keyUp">
+    <!--    once-->
+    <button @click.once="btn3Click">按钮2</button>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data:{
+            counter:0
+        },
+        methods:{
+            btn1Click(){
+                console.log('btn1Click');
+            },
+            btn2Click(){
+                console.log('--------');
+            },
+            submitClick(){
+                console.log('++++++++');
+            },
+            keyUp(){
+                console.log('keyUp');
+            },
+            btn3Click(){
+                console.log('btn3Click');
+            }
+        }
+    })
+</script>
+</body>
+</html>

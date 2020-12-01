@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父传子</title>
+</head>
+<body>
+<div id="app">
+    <cpn :cmovies="movies"></cpn>
+</div>
+<template id="cpnC">
+    <div>
+        <h2>{{cmovies}}</h2>
+    </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+    const cpn = {
+        template: `#cpnC`,
+        // props:['cmovies'],
+        props: {
+            cmovies: {
+                type: Array,
+                default: [],
+                required:true//是否必传参数
+            }
+        },
+        validate(value){
+            console.log('aaaaa'+value);
+            return value.length < 0
+        },
+        data(){
+            return {}
+        }
+    }
+    const app = new Vue({
+        el: '#app',
+        data: {
+            movies:['aaa','bbb','ccc','ddd']
+        },
+        components: {//局部组件
+            cpn
+        }
+
+    })
+</script>
+</body>
+</html>

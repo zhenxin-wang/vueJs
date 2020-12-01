@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <cpn @itemclick="cpnClick"></cpn>
+</div>
+<template id="cpnC">
+    <div>
+        <button v-for="item in categories" @click="itemClick(item)">
+            {{item.name}}
+        </button>
+    </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+    const cpn = {
+        template: `#cpnC`,
+        data(){
+            return {
+                categories:[
+                    {id:'aaa',name:'111'},
+                    {id:'bbb',name:'222'},
+                    {id:'ccc',name:'333'},
+                    {id:'ddd',name:'444'},
+                ]
+            }
+        },
+        methods:{
+            itemClick(item){
+                //发射事件
+                this.$emit('itemclick',item)
+            }
+        }
+    }
+    const app = new Vue({
+        el: '#app',
+        data: {
+            movies:['aaa','bbb','ccc','ddd']
+        },
+        components: {//局部组件
+            cpn
+        },
+        methods: {
+            //接收子组件事件
+            cpnClick(item){
+                console.log(item);
+            }
+        }
+
+    })
+</script>
+</body>
+</html>
