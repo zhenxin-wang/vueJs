@@ -17,14 +17,14 @@ new Vue({
 // axios.defaults.baseURL = 'http://123.207.32.32:8000'
 //
 // axios({
-//   url: '/home/multidata',
+//   url: '/content/multidata',
 //   method: 'get'
 // }).then(res => {
 //   console.log(res);
 // })
 //
 // axios({
-//   url: '/home/data',
+//   url: '/content/data',
 //   params: {
 //     type:'pop',
 //     page: 1
@@ -37,7 +37,7 @@ new Vue({
 //创建axios实例
 // const instance = axios.create()
 request({
-  url: '/home/multidata'
+  url: '/content/multidata'
 }).then(res => {
   console.log(res);
 }).catch(err => {
