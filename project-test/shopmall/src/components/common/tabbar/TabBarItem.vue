@@ -17,7 +17,7 @@
         },
         tabColor:{
           type: String,
-          default: 'deepPink'
+          default: '#ff8198'
         }
       },
       computed: {//非data设置的数据，实现页面和数据双向绑定，计算函数
