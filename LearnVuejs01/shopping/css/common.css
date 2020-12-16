@@ -54,6 +54,7 @@
 }
 /*搜索头部*/
 .header{
+    /*position: relative;*/
     height: 105px;
     display: flex;
     justify-content: space-between;
@@ -224,7 +225,7 @@
 /*底部样式*/
 .footer{
     height: 415px;
-    border-top: 1px solid #5c6b77;
+    /*border-top: 1px solid #5c6b77;*/
     background-color: #f5f5f5;
     padding-top: 30px;
 }
