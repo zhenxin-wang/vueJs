@@ -1,116 +1,122 @@
-.w {
-    width: 1200px;
-    margin: 0 auto;
-}
-header {
+
+.header_logo{
+    position: relative;
     height: 84px;
-    border-bottom: 2px solid #c81523;
+    border-bottom: 2px solid #e60012;
 }
-.logo {
-    padding-top: 18px;
+.logo{
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
 }
-.registerarea {
+.register_content{
     height: 522px;
+    display: flex;
+    flex-direction: column;
     border: 1px solid #ccc;
-    margin-top: 20px;
+    margin-top: 10px;
 }
-.registerarea h3 {
-    height: 42px;
-    border-bottom: 1px solid #ccc;
-    background-color: #ececec;
-    line-height: 42px;
+.register_titile{
+    height: 40px;
+    line-height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid #b0b0b0;
     padding: 0 10px;
-    font-size: 18px;
-    font-weight: 400;
+    color: #000000;
 }
-.login {
-    float: right;
+.register_titile span:nth-child(1){
+    font-size: 18px;
+}
+.register_titile span:nth-child(2){
     font-size: 14px;
 }
-.login a {
-    color: #c81523;
+.register_titile a{
+    color: #e60012;
 }
-.reg_form {
-    width: 600px;
+.register_titile a {
+    color: #e60012;
+}
+.reg_form{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /*background-color: red;*/
+}
 
-    margin: 50px auto 0;
+.reg_form ul li{
+    margin-top: 20px;
 }
-.reg_form ul li {
-    margin-bottom: 20px;
-}
-.reg_form ul li label {
+.reg_form ul li label{
     display: inline-block;
     width: 88px;
     text-align: right;
 }
-.reg_form ul li .inp {
-    width: 242px;
+.reg_form ul li .inp{
     height: 37px;
+    width: 260px;
+    line-height: 35px;
     border: 1px solid #ccc;
 }
-.error {
+.anquan{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-right: 10px;
+}
+.anquan span{
+    margin-right: 5px;
+}
+.anquan span:nth-child(n+2){
+    height: 15px;
+    width: 30px;
+    line-height: 15px;
+    text-align: center;
+    color: white;
+}
+.check{
+    height: 30px;
+    line-height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 40px;
+}
+.register_btn{
+    margin-top: 20px;
+    height: 40px;
+    width: 200px;
+    color: white;
+    background-color: #c81623;
+    border-radius: 5px;
+    margin-right: 60px;
+}
+.error{
     color: #c81523;
 }
-.error_icon,
-.success_icon {
+.error_icon{
     display: inline-block;
     vertical-align: middle;
+    margin: auto 5px;
     width: 20px;
     height: 20px;
-    background: url(../images/error.png) no-repeat;
-    margin-top: -2px;
-}
-.success {
-    color: green;
-}
-.success_icon {
-    background: url(../images/success.png) no-repeat;
-}
-.safe {
-    padding-left: 170px;
-}
-.safe em {
-    padding: 0 12px;
-    color: #fff;
-}
-.ruo {
-    background-color: #de1111;
-}
-.zhong {
-    background-color: #40b83f;
+    background: url("../images/error.png") no-repeat;
+
 }
 
-.qiang {
-    background-color: #f79100;
+.success{
+    color: green;
 }
-.agree {
-    padding-left: 95px;
-}
-.agree input {
+.success_icon{
+    display: inline-block;
     vertical-align: middle;
-}
-.agree a {
-    color: #1ba1e6;
-}
-.btn {
-    width: 200px;
-    height: 34px;
-    background-color: #c81623;
-    font-size: 14px;
-    color: #fff;
-    margin: 30px 0 0 70px;
-}
-.mod_copyright {
-    text-align: center;
-    padding-top: 20px;
-}
-.links {
-    margin-bottom: 15px;
-}
-.links a {
-    margin: 0 3px;
-}
-.copyright {
-    line-height: 20px;
+    margin: auto 5px;
+    width: 20px;
+    height: 20px;
+    background: url("../images/success.png") no-repeat;
+
 }
 
