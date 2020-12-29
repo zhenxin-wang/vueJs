@@ -6,8 +6,9 @@
             text-color="#fff"
             active-text-color="#ffd04b"
             router
+            :collapse="isCollapse"
     >
-        <el-menu-item index="/home">
+        <el-menu-item index="/">
             <i class="el-icon-menu"></i>
             <span slot="title">首页</span>
         </el-menu-item>
@@ -41,6 +42,11 @@
 <script>
     export default {
         name: "leftMenu",
+        props: {
+            isCollapse:{
+                type:Boolean
+            }
+        },
         methods: {
 
         }

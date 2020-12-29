@@ -6,7 +6,7 @@ Vue.use(Router)
 const routes = [
   {
     path:'/',
-    redirect: '/login'
+    redirect: '/home'
   },
   {
     path: '/login',
@@ -14,10 +14,15 @@ const routes = [
     component: () => import('../views/login/index')
   },
   {
-    path: '/home',
-    name: 'home',
+    path: '/index',
+    name: 'index',
     component: () => import('../views/home/index'),
     children: [
+      {
+        path: '/home',
+        name: 'home',
+        component: () => import('../views/home/home')
+      },
       {
         path: '/article',
         name: 'article',
@@ -52,9 +57,18 @@ const routes = [
   },
 
 ]
-
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
+//路由导航守卫
+// router.beforeEach((to,from,next)=>{
+//   if (to.path === '/login'){
+//     next()
+//   }else{
+//     next('/login')
+//   }
+// })
+export default router
+
