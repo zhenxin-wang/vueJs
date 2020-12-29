@@ -26,6 +26,7 @@
 </template>
 
 <script>
+
     export default {
         name: "loginIndex",
         data() {
@@ -65,6 +66,9 @@
 
         methods: {
             onlogin(user) {
+                // login(user).then(res =>{
+                //     console.log(res);
+                // })
                 this.loginloading = true
                 setTimeout(()=>{
                     this.$refs[user].validate((valid) => {
@@ -88,7 +92,7 @@
                         }
 
                     })
-                },1000)
+                },500)
             }
         }
 

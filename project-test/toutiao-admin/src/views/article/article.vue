@@ -41,6 +41,9 @@
             </div>
         </el-card>
         <el-card class="box-card">
+            <div slot="header">
+                根据筛选条件共查询到333条数据:
+            </div>
             <el-table
                     :data="tableData"
                     style="width: 100%">
