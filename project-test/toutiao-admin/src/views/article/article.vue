@@ -27,7 +27,7 @@
                     </el-form-item>
                     <el-form-item label="日期:">
                         <el-date-picker
-                                v-model="value1"
+                                v-model="form.date1"
                                 type="daterange"
                                 range-separator="至"
                                 start-placeholder="开始日期"
@@ -48,24 +48,50 @@
                     :data="tableData"
                     style="width: 100%">
                 <el-table-column
-                        prop="date"
-                        label="日期"
-                        width="180">
+                        prop="id"
+                        label="封面">
+                    <template slot-scope="scope">
+                        <img :src="scope.row.cover.images" style="width: 100px;height: 100px" alt="">
+                    </template>
                 </el-table-column>
                 <el-table-column
-                        prop="name"
-                        label="姓名"
-                        width="180">
+                        prop="title"
+                        label="标题">
                 </el-table-column>
                 <el-table-column
-                        prop="address"
-                        label="地址">
+                        prop="status"
+                        label="状态展示形态"
+                        :formatter="statusFormatter">
+                </el-table-column>
+                <el-table-column
+                        label="状态">
+                    <template slot-scope="scope">
+                        <el-tag v-if="scope.row.status == 0">草稿</el-tag>
+                        <el-tag type="warning" v-if="scope.row.status == 1">待审核</el-tag>
+                        <el-tag type="success" v-if="scope.row.status == 2">审核通过</el-tag>
+                        <el-tag type="info" v-if="scope.row.status == 3">审核失败</el-tag>
+                        <el-tag type="danger" v-if="scope.row.status == 4">已删除</el-tag>
+
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        prop="begin_pubdate"
+                        label="发布时间">
+                </el-table-column>
+                <el-table-column
+                        label="操作">
+                    <template slot-scope="scope">
+                        <el-button type="primary" icon="el-icon-edit" @click="handleEdit(scope.$index, scope.row)" circle></el-button>
+                        <el-button type="danger" icon="el-icon-delete" @click="handleDelete(scope.$index, scope.row)" circle></el-button>
+                    </template>
                 </el-table-column>
             </el-table>
             <el-pagination
                     background
                     layout="prev, pager, next"
-                    :total="1000">
+                    :total="110"
+                    @current-change="handleCurrentChange"
+                    >
             </el-pagination>
         </el-card>
 
@@ -74,8 +100,10 @@
 </template>
 
 <script>
+    import {getArticleData} from "../../network/articleData";
+
     export default {
-        name: "article",
+        name: "articleIndex",
         data(){
             return {
                 form: {
@@ -88,61 +116,53 @@
                     resource: '',
                     desc: ''
                 },
-                tableData: [{
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1517 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
-                }]
+                tableData: [],
+                page:0,
+                pageCount:5
             }
         },
         methods:{
             onSubmit(){
 
+            },
+            getArticleData(page,pageCount){
+                this.tableData = getArticleData(page,pageCount)
+                console.log(this.tableData);
+            },
+            //编辑
+            handleEdit(index, row) {
+                console.log(index, row);
+            },
+            //删除
+            handleDelete(index, row) {
+                console.log(index, row);
+            },
+            //渲染状态内容
+            statusFormatter(row){
+                const indexStatus = row.status
+                if (indexStatus == 0){
+                    return '草稿'
+                }else if(indexStatus == 1){
+                    return '待审核'
+                }else if(indexStatus == 2 ){
+                    return '审核通过'
+                }else if(indexStatus == 3){
+                    return '审核失败'
+                }else if(indexStatus == 4){
+                    return '已删除'
+                }else {
+                    return '全部'
+                }
+            },
+
+            handleCurrentChange(val) {
+                this.page = val-1
+                console.log(`当前页: ${val}`);
+                this.getArticleData(this.page,this.pageCount)
             }
+        },
+        created() {
+            this.getArticleData(this.page,this.pageCount)
         }
     }
 </script>
