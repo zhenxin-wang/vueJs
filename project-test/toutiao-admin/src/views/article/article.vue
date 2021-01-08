@@ -55,7 +55,8 @@
             </div>
             <el-table
                     :data="tableData"
-                    style="width: 100%">
+                    style="width: 100%"
+                    v-loading="loading">
                 <el-table-column
                         prop="id"
                         label="封面">
@@ -98,7 +99,9 @@
                     layout="prev, pager, next"
                     :total="110"
                     :page-size="pageSize"
+                    :current-page="page"
                     @current-change="handleCurrentChange"
+                    :disabled="loading"
                     >
             </el-pagination>
         </el-card>
@@ -118,9 +121,10 @@
                     channelId: '',
                     date1: '',
                     status: 'null',
+
                 },
                 tableData: [],
-                page:0,
+                page:1,
                 pageSize:5,
                 articleStatus:[
                     {status:0,text:'草稿',type:'info'},
@@ -129,7 +133,8 @@
                     {status:3,text:'审核失败',type:'warning'},
                     {status:4,text:'已删除',type:'danger'}
                 ],
-                channels:[]
+                channels:[],
+                loading: false
             }
         },
         methods:{
@@ -137,16 +142,36 @@
                 this.getArticleData(this.page,this.pageSize,this.form)
             },
             getArticleData(page,pageSize,form){
-                this.tableData = getArticleData(page,pageSize,form)
+                this.loading = true
+                setTimeout(()=>{
+                    this.loading = false
+                    this.tableData = getArticleData(page,pageSize,form)
+                },500)
+
 
             },
             //编辑
             handleEdit(index, row) {
                 console.log(index, row);
+                const data = this.tableData[index]
+                this.$router.push({name:'publish',query:{type:'update'},params:{data}})
             },
             //删除
             handleDelete(index, row) {
-                console.log(index, row);
+                // console.log(index, row);
+                // this.tableData.splice(index,1)
+                this.$confirm('是否删除文章?', '提示', {
+                    confirmButtonText: '删除',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.tableData.splice(index,1)
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除文章'
+                    });
+                });
             },
             //渲染状态内容
             channelFormatter(row){
@@ -155,7 +180,7 @@
             },
             //分页页码处理
             handleCurrentChange(val) {
-                this.page = val-1
+                this.page = val
                 console.log(`当前页: ${val}`);
                 this.getArticleData(this.page,this.pageSize,this.form)
             },
