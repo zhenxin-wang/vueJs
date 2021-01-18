@@ -32,33 +32,13 @@
                             <el-radio :label="0">无图</el-radio>
                             <el-radio :label="-1">自动</el-radio>
                         </el-radio-group>
-                        <el-upload
-                                action="#"
-                                list-type="picture-card"
-                                :auto-upload="false">
-                            <i slot="default" class="el-icon-plus"></i>
-                            <div slot="file" slot-scope="{file}">
-                                <img
-                                        class="el-upload-list__item-thumbnail"
-                                        :src="file.url" alt=""
-                                >
-                                <span class="el-upload-list__item-actions">
-                                <span
-                                        class="el-upload-list__item-preview"
-                                        @click="handlePictureCardPreview(file)"
-                                >
-                                    <i class="el-icon-zoom-in"></i>
-                                </span>
-                                <span
-                                        v-if="!disabled"
-                                        class="el-upload-list__item-delete"
-                                        @click="handleRemove(file)"
-                                >
-                                  <i class="el-icon-delete"></i>
-                                </span>
-                              </span>
+                        <template v-if="form.cover.type > 0" >
+                            <div class="uploadcover">
+                                <upload-cover v-for="cover in form.cover.type" :key="cover" style="margin-right: 10px"/>
                             </div>
-                        </el-upload>
+
+                        </template>
+
                     </el-form-item>
                     <el-form-item label="频道:" prop="id">
                         <el-select v-model="form.channel_id" placeholder="请选择">
@@ -103,11 +83,11 @@
         BulletList,
         OrderedList,
     } from 'element-tiptap';
-
+    import uploadCover from "./components/uploadCover";
     export default {
         name: "publish",
         components:{
-            // 'el-tiptap': ElementTiptap
+            uploadCover
         },
         data(){
             return {
@@ -218,5 +198,9 @@
 </script>
 
 <style scoped>
-
+    .uploadcover{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
 </style>

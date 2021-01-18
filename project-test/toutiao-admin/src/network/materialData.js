@@ -2,7 +2,7 @@ const data = [
     {
         id:1,
         src:'http://h.hiphotos.baidu.com/image/pic/item/7c1ed21b0ef41bd5f2c2a9e953da81cb39db3d1d.jpg',
-        is_collected:true
+        is_collected:false
     },
     {
         id:2,
@@ -167,11 +167,11 @@ const data = [
 
 ]
 export function getMaterialData(page,count,collected=false) {
-
-    var aData = data
-    if (collected){
-        aData = data.filter(item => item.is_collected)
-    }
-    return aData.slice((page-1)*count,(page)*count)
+    return data
+    // var aData = data
+    // if (collected){
+    //     aData = data.filter(item => item.is_collected)
+    // }
+    // return aData.slice((page-1)*count,(page)*count)
 
 }
